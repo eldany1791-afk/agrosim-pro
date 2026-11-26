@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroSim Pro | Plataforma AgTech de Cultivo Inteligente</title>
+    <!-- Tipografías modernas: Plus Jakarta Sans y JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./agrosim.css">
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- =====================================================================
+         1. PANTALLA DE INICIO DE SESIÓN MODERNA (DOS COLUMNAS)
+    ====================================================================== -->
+    <div id="login-view" class="fixed inset-0 z-50 bg-slate-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div class="w-full max-w-5xl bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+            
+            <!-- Columna Izquierda: Presentación AgTech y Vista Previa de Telemetría -->
+            <div class="lg:col-span-6 bg-slate-900 text-white p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden">
+                <!-- Decoración geométrica sutil -->
+                <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-emerald-500/10 blur-2xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-cyan-500/10 blur-2xl pointer-events-none"></div>
+
+                <div class="relative z-10 space-y-6">
+                    <div class="inline-flex items-center gap-2.5 bg-slate-800/90 border border-slate-700 px-3.5 py-1.5 rounded-full">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="text-xs font-semibold tracking-wide text-slate-200">SISTEMA AGTECH DE PRECISIÓN</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 rounded-2xl bg-emerald-500 flex items-center justify-center text-slate-950 font-extrabold text-xl shadow-lg shadow-emerald-500/20">
+                                🌱
+                            </div>
+                            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                                AgroSim <span class="text-emerald-400">Pro</span>
+                            </h1>
+                        </div>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            Simulador interactivo de invernadero inteligente. Controla microclimas en tiempo real, previene el ahogamiento radicular y domina el ciclo agronómico de tus cultivos.
+                        </p>
+                    </div>
+
+                    <!-- Tarjeta Vista Previa de Telemetría -->
+                    <div class="bg-slate-800/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="font-semibold text-slate-400 uppercase tracking-wider">Telemetría en Vivo • Módulo A1</span>
+                            <span class="font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">● ÓPTIMO</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2.5 pt-1">
+                            <div class="bg-slate-900/80 border border-slate-700/70 rounded-xl p-2.5">
+                                <div class="text-[11px] text-slate-400">💧 Riego Suelo</div>
+                                <div class="font-mono text-base font-bold text-cyan-400 mt-0.5">62%</div>
+                            </div>
+                            <div class="bg-slate-900/80 border border-slate-700/70 rounded-xl p-2.5">
+                                <div class="text-[11px] text-slate-400">🌡️ Temp. Aire</div>
+                                <div class="font-mono text-base font-bold text-amber-400 mt-0.5">24°C</div>
+                            </div>
+                            <div class="bg-slate-900/80 border border-slate-700/70 rounded-xl p-2.5">
+                                <div class="text-[11px] text-slate-400">☁️ Humedad</div>
+                                <div class="font-mono text-base font-bold text-emerald-400 mt-0.5">68%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de características clave -->
+                <div class="relative z-10 pt-8 mt-6 border-t border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                    <div class="flex items-start gap-2">
+                        <span class="text-emerald-400 font-bold">✓</span>
+                        <span class="text-slate-300">Monitoreo visual instantáneo</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <span class="text-emerald-400 font-bold">✓</span>
+                        <span class="text-slate-300">Alertas agronómicas inteligentes</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <span class="text-emerald-400 font-bold">✓</span>
+                        <span class="text-slate-300">Guardado automático por perfil</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Formulario de Acceso -->
+            <div class="lg:col-span-6 p-8 sm:p-10 flex flex-col justify-center bg-white">
+                <div class="max-w-md w-full mx-auto space-y-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">Acceso de Agricultor</span>
+                        <h2 class="text-2xl font-extrabold text-slate-900 mt-1">Ingresa a tu Invernadero</h2>
+                        <p class="text-sm text-slate-500 mt-1">
+                            Tus parámetros, avances semanales y cosechas se guardarán automáticamente bajo tu perfil.
+                        </p>
+                    </div>
+
+                    <form id="form-login" onsubmit="manejarLogin(event)" class="space-y-4">
+                        <div>
+                            <label for="login-nombre" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                                Nombre del Agricultor
+                            </label>
+                            <input type="text" id="login-nombre" required placeholder="Ej. Daniel Camargo" value="Daniel Camargo"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white text-slate-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all">
+                        </div>
+
+                        <div>
+                            <label for="login-parcela" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                                Nombre de la Parcela / Invernadero
+                            </label>
+                            <input type="text" id="login-parcela" required placeholder="Ej. Invernadero Norte" value="Invernadero Norte"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white text-slate-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all">
+                        </div>
+
+                        <button type="submit"
+                            class="w-full py-3.5 px-5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold text-sm rounded-xl shadow-sm transition-all flex items-center justify-center gap-2">
+                            <span>Ingresar al Panel de Control</span>
+                            <span>→</span>
+                        </button>
+                    </form>
+
+                    <div class="relative flex items-center py-1">
+                        <div class="flex-grow border-t border-slate-200"></div>
+                        <span class="flex-shrink mx-3 text-xs font-medium text-slate-400">o prueba sin registro</span>
+                        <div class="flex-grow border-t border-slate-200"></div>
+                    </div>
+
+                    <button type="button" onclick="iniciarModoDemo()"
+                        class="w-full py-3 px-4 bg-slate-100 hover:bg-slate-200/80 text-slate-700 font-semibold text-xs rounded-xl border border-slate-200 transition-colors flex items-center justify-center gap-2">
+                        <span>⚡ Acceso Rápido (Modo Demo)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         2. DASHBOARD PRINCIPAL AGTECH
+    ====================================================================== -->
+    
+    <!-- Barra Superior (Header) -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+            
+            <!-- Marca + Badge Agricultor/Parcela -->
+            <div class="flex items-center gap-3 min-w-0">
+                <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg font-bold shrink-0">
+                    🌱
+                </div>
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <span class="font-extrabold text-slate-900 text-base sm:text-lg tracking-tight shrink-0">
+                        AgroSim <span class="text-emerald-600">Pro</span>
+                    </span>
+                    <span class="hidden sm:inline-block h-4 w-px bg-slate-200"></span>
+                    <div id="header-user-badge" class="hidden sm:flex items-center gap-2 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full text-xs truncate">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+                        <span id="badge-usuario" class="font-bold text-slate-800 truncate">Daniel Camargo</span>
+                        <span class="text-slate-400">•</span>
+                        <span id="badge-parcela" class="font-medium text-slate-600 truncate">Invernadero Norte</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Indicadores de Ciclo, Cosechas, Audio y Cierre de Sesión -->
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                <!-- Contador de Semanas y Cosechas -->
+                <div class="flex items-center bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 gap-3">
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-[11px] font-semibold text-slate-500 uppercase hidden md:inline">Ciclo:</span>
+                        <span id="header-semana" class="font-mono text-xs sm:text-sm font-bold text-slate-900">Semana 1 / 4</span>
+                    </div>
+                    <div class="h-4 w-px bg-slate-200"></div>
+                    <div class="flex items-center gap-1.5" title="Cosechas exitosas acumuladas">
+                        <span class="text-sm">🏆</span>
+                        <span id="header-cosechas" class="font-mono text-xs sm:text-sm font-bold text-amber-600">0</span>
+                    </div>
+                </div>
+
+                <!-- Botón Audio Web Audio API -->
+                <button type="button" onclick="toggleAudio()" id="btn-audio" title="Activar o silenciar alertas sonoras"
+                    class="p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition-colors flex items-center gap-1.5 text-xs font-semibold">
+                    <span id="icon-audio">🔊</span>
+                    <span id="text-audio" class="hidden lg:inline">Audio ON</span>
+                </button>
+
+                <!-- Botón Cerrar Sesión / Cambiar Perfil -->
+                <button type="button" onclick="cerrarSesion()"
+                    class="px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 text-slate-600 text-xs font-bold transition-colors flex items-center gap-1.5">
+                    <span>Salir</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+            <!-- ===============================================================
+                 PANEL IZQUIERDO (4 cols): Selector de Cultivo y Telemetría
+            ================================================================ -->
+            <section class="lg:col-span-4 space-y-5">
+                
+                <!-- Tarjeta 1: Selector de Cultivo -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 space-y-3.5">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Módulo 01</span>
+                            <h2 class="text-sm font-extrabold text-slate-900">Selección de Especie</h2>
+                        </div>
+                        <button type="button" onclick="reiniciarCultivoActual()" class="text-xs font-semibold text-slate-500 hover:text-emerald-600 transition-colors">
+                            ↺ Reiniciar ciclo
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2.5" id="selector-cultivos">
+                        <button type="button" onclick="seleccionarCultivo('tomate')" id="card-cultivo-tomate"
+                            class="crop-card flex items-center gap-3 p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50/40 text-left transition-all">
+                            <span class="text-2xl w-10 h-10 rounded-lg bg-white border border-slate-200/80 flex items-center justify-center shrink-0">🍅</span>
+                            <div class="min-w-0">
+                                <div class="text-sm font-bold text-slate-900 truncate">Tomate</div>
+                                <div class="text-[11px] text-slate-500 truncate">Sol • Riego medio</div>
+                            </div>
+                        </button>
+
+                        <button type="button" onclick="seleccionarCultivo('lechuga')" id="card-cultivo-lechuga"
+                            class="crop-card flex items-center gap-3 p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition-all">
+                            <span class="text-2xl w-10 h-10 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center justify-center shrink-0">🥬</span>
+                            <div class="min-w-0">
+                                <div class="text-sm font-bold text-slate-900 truncate">Lechuga</div>
+                                <div class="text-[11px] text-slate-500 truncate">Fresco • Húmedo</div>
+                            </div>
+                        </button>
+
+                        <button type="button" onclick="seleccionarCultivo('papa')" id="card-cultivo-papa"
+                            class="crop-card flex items-center gap-3 p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition-all">
+                            <span class="text-2xl w-10 h-10 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center justify-center shrink-0">🥔</span>
+                            <div class="min-w-0">
+                                <div class="text-sm font-bold text-slate-900 truncate">Papa</div>
+                                <div class="text-[11px] text-slate-500 truncate">Tubérculo • Aireado</div>
+                            </div>
+                        </button>
+
+                        <button type="button" onclick="seleccionarCultivo('fresa')" id="card-cultivo-fresa"
+                            class="crop-card flex items-center gap-3 p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition-all">
+                            <span class="text-2xl w-10 h-10 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center justify-center shrink-0">🍓</span>
+                            <div class="min-w-0">
+                                <div class="text-sm font-bold text-slate-900 truncate">Fresa</div>
+                                <div class="text-[11px] text-slate-500 truncate">Fruto • Anti-moho</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2: Consola de Control Ambiental (3 Sliders) -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 space-y-5">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3.5">
+                        <div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Módulo 02</span>
+                            <h2 class="text-sm font-extrabold text-slate-900">Control de Variables</h2>
+                        </div>
+                        <button type="button" onclick="calibrarOptimos()"
+                            class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-bold transition-colors">
+                            ✨ Calibrar Óptimos
+                        </button>
+                    </div>
+
+                    <!-- Control 1: Riego -->
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <label for="slider-riego" class="text-xs font-bold text-slate-700 flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-lg bg-cyan-50 border border-cyan-200 text-cyan-600 flex items-center justify-center text-xs">💧</span>
+                                Riego (Humedad Suelo)
+                            </label>
+                            <span id="readout-riego" class="font-mono text-sm font-bold px-2.5 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                60%
+                            </span>
+                        </div>
+                        <input type="range" id="slider-riego" class="telemetry-slider" min="0" max="100" value="60" oninput="actualizarTodo(true)">
+                        <div class="flex items-center justify-between text-[11px] text-slate-400 font-medium">
+                            <span>0% Sequía</span>
+                            <span id="optimo-riego-label" class="font-mono text-slate-600 font-semibold">Óptimo: 50–70%</span>
+                            <span>100% Inundado</span>
+                        </div>
+                    </div>
+
+                    <!-- Control 2: Temperatura -->
+                    <div class="space-y-2 pt-3 border-t border-slate-100">
+                        <div class="flex items-center justify-between">
+                            <label for="slider-temp" class="text-xs font-bold text-slate-700 flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-lg bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center text-xs">🌡️</span>
+                                Temperatura Ambiente
+                            </label>
+                            <span id="readout-temp" class="font-mono text-sm font-bold px-2.5 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                24°C
+                            </span>
+                        </div>
+                        <input type="range" id="slider-temp" class="telemetry-slider" min="5" max="40" value="24" oninput="actualizarTodo(true)">
+                        <div class="flex items-center justify-between text-[11px] text-slate-400 font-medium">
+                            <span>5°C Helada</span>
+                            <span id="optimo-temp-label" class="font-mono text-slate-600 font-semibold">Óptimo: 20–28°C</span>
+                            <span>40°C Calor</span>
+                        </div>
+                    </div>
+
+                    <!-- Control 3: Humedad Ambiental -->
+                    <div class="space-y-2 pt-3 border-t border-slate-100">
+                        <div class="flex items-center justify-between">
+                            <label for="slider-humedad" class="text-xs font-bold text-slate-700 flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-lg bg-teal-50 border border-teal-200 text-teal-600 flex items-center justify-center text-xs">☁️</span>
+                                Humedad Relativa Aire
+                            </label>
+                            <span id="readout-humedad" class="font-mono text-sm font-bold px-2.5 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                68%
+                            </span>
+                        </div>
+                        <input type="range" id="slider-humedad" class="telemetry-slider" min="20" max="100" value="68" oninput="actualizarTodo(true)">
+                        <div class="flex items-center justify-between text-[11px] text-slate-400 font-medium">
+                            <span>20% Árido</span>
+                            <span id="optimo-humedad-label" class="font-mono text-slate-600 font-semibold">Óptimo: 60–75%</span>
+                            <span>100% Vapor</span>
+                        </div>
+                    </div>
+
+                    <!-- Botón Avanzar 1 Semana -->
+                    <div class="pt-3 border-t border-slate-100">
+                        <button type="button" onclick="avanzarSemana()"
+                            class="w-full py-3.5 px-4 bg-slate-900 hover:bg-slate-800 active:bg-slate-950 text-white font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2">
+                            <span>⏭️ Avanzar 1 Semana</span>
+                        </button>
+                        <p class="text-[11px] text-slate-400 text-center mt-2">
+                            Evalúa el microclima actual para desarrollar el cultivo hacia la semana 4.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 PANEL CENTRAL (5 cols): Alertas e Invernadero Inteligente SVG
+            ================================================================ -->
+            <section class="lg:col-span-5 space-y-5">
+                
+                <!-- Banner Inteligente de Alertas en Tiempo Real -->
+                <div id="alert-banner" class="rounded-2xl border border-emerald-300 bg-emerald-50/90 p-4 transition-all">
+                    <div class="flex items-start gap-3.5">
+                        <div id="alert-icon-box" class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg font-bold shrink-0">
+                            ✓
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between gap-2">
+                                <span id="alert-status-pill" class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md bg-emerald-200/80 text-emerald-900">
+                                    Condición Óptima
+                                </span>
+                                <span id="alert-vitality" class="font-mono text-xs font-bold text-emerald-800">
+                                    Vitalidad: 100%
+                                </span>
+                            </div>
+                            <h3 id="alert-title" class="text-sm font-extrabold text-emerald-950 mt-1">
+                                MICROCLIMA EN EQUILIBRIO IDEAL
+                            </h3>
+                            <p id="alert-desc" class="text-xs text-emerald-900/85 mt-0.5 leading-relaxed">
+                                Riego, temperatura y humedad se encuentran dentro de la zona de confort fisiológico del cultivo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Escenario Visual de Invernadero Inteligente -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 space-y-3.5">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Gemelo Digital</span>
+                            <h2 class="text-sm font-extrabold text-slate-900">Invernadero Inteligente</h2>
+                        </div>
+                        <span id="stage-badge" class="font-mono text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 border border-slate-200">
+                            Etapa 1/4 • Plántula
+                        </span>
+                    </div>
+
+                    <!-- Contenedor SVG Moderno -->
+                    <div class="w-full aspect-square max-h-[390px] mx-auto rounded-2xl border border-slate-200 overflow-hidden bg-slate-50 relative">
+                        <svg id="greenhouse-svg" viewBox="0 0 360 360" class="w-full h-full">
+                            <defs>
+                                <!-- Gradiente de fondo del invernadero -->
+                                <linearGradient id="gh-bg-grad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop id="gh-sky-top" offset="0%" stop-color="#ecfeff" />
+                                    <stop id="gh-sky-bottom" offset="100%" stop-color="#f8fafc" />
+                                </linearGradient>
+                                <!-- Gradiente del sustrato/tierra -->
+                                <linearGradient id="gh-soil-grad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop id="gh-soil-top" offset="0%" stop-color="#78350f" />
+                                    <stop id="gh-soil-bottom" offset="100%" stop-color="#451a03" />
+                                </linearGradient>
+                            </defs>
+
+                            <!-- 1. Atmósfera interior del invernadero -->
+                            <rect x="0" y="0" width="360" height="360" fill="url(#gh-bg-grad)" class="svg-transition" />
+
+                            <!-- 2. Estructura arquitectónica del invernadero (arcos y paneles de vidrio) -->
+                            <g stroke="#cbd5e1" stroke-width="1.5" fill="none">
+                                <path d="M 24 335 L 24 95 Q 180 22 336 95 L 336 335" stroke="#94a3b8" stroke-width="2.5" />
+                                <line x1="95" y1="64" x2="95" y2="245" stroke-dasharray="4 4" />
+                                <line x1="180" y1="58" x2="180" y2="245" stroke-dasharray="4 4" />
+                                <line x1="265" y1="64" x2="265" y2="245" stroke-dasharray="4 4" />
+                                <line x1="24" y1="125" x2="336" y2="125" />
+                            </g>
+
+                            <!-- 3. Indicador Solar / Térmico Superior Derecho -->
+                            <g id="gh-sun-group" transform="translate(295, 72)" class="svg-transition">
+                                <circle id="gh-sun-halo" cx="0" cy="0" r="26" fill="#f59e0b" opacity="0.2" class="svg-transition" />
+                                <circle id="gh-sun-core" cx="0" cy="0" r="15" fill="#f59e0b" class="svg-transition" />
+                            </g>
+
+                            <!-- 4. Ondas de Calor Ascendentes (Temperatura alta) -->
+                            <g id="gh-heat-waves" opacity="0" stroke="#f97316" stroke-width="2.2" stroke-linecap="round" fill="none" class="svg-transition anim-heat">
+                                <path d="M 75 185 Q 88 176 75 167 T 75 149" />
+                                <path d="M 135 165 Q 148 156 135 147 T 135 129" />
+                                <path d="M 230 175 Q 243 166 230 157 T 230 139" />
+                                <path d="M 280 190 Q 293 181 280 172 T 280 154" />
+                            </g>
+
+                            <!-- 5. Neblina / Vapor Flotante (Humedad excesiva) -->
+                            <g id="gh-fog-layer" opacity="0" class="svg-transition anim-fog">
+                                <rect x="32" y="132" width="296" height="95" rx="20" fill="#ffffff" opacity="0.55" />
+                                <rect x="48" y="148" width="120" height="16" rx="8" fill="#e2e8f0" opacity="0.8" />
+                                <rect x="188" y="168" width="130" height="18" rx="9" fill="#e2e8f0" opacity="0.8" />
+                                <rect x="85" y="192" width="160" height="14" rx="7" fill="#ffffff" opacity="0.85" />
+                            </g>
+
+                            <!-- 6. Sistema de Riego Automatizado Superior -->
+                            <g id="gh-sprinkler">
+                                <rect x="24" y="122" width="135" height="6" rx="3" fill="#475569" />
+                                <rect x="148" y="128" width="8" height="9" rx="2" fill="#0284c7" />
+                                <!-- Gotas de riego -->
+                                <g id="gh-water-drops" fill="#06b6d4" opacity="0.85">
+                                    <circle cx="152" cy="144" r="3" class="anim-drip" />
+                                    <circle cx="152" cy="158" r="2.5" class="anim-drip" style="animation-delay: 0.55s" />
+                                </g>
+                            </g>
+
+                            <!-- 7. Sensores IoT Laterales Conectados -->
+                            <!-- Sensor Izquierdo: Sonda de Suelo y Riego -->
+                            <g id="sensor-left">
+                                <rect x="34" y="198" width="44" height="26" rx="6" fill="#0f172a" />
+                                <circle id="led-sensor-riego" cx="44" cy="211" r="3.5" fill="#10b981" />
+                                <text x="52" y="214" fill="#f8fafc" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" id="svg-txt-riego">60%</text>
+                                <line x1="56" y1="224" x2="56" y2="275" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" />
+                            </g>
+
+                            <!-- Sensor Derecho: Estación Microclimática (Temp & Humedad) -->
+                            <g id="sensor-right">
+                                <rect x="274" y="152" width="52" height="38" rx="7" fill="#0f172a" />
+                                <circle id="led-sensor-clima" cx="284" cy="164" r="3" fill="#10b981" />
+                                <text x="292" y="167" fill="#f8fafc" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" id="svg-txt-temp">24°C</text>
+                                <text x="283" y="181" fill="#38bdf8" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" id="svg-txt-hum">H:68%</text>
+                                <line x1="300" y1="190" x2="300" y2="245" stroke="#94a3b8" stroke-width="2" />
+                            </g>
+
+                            <!-- 8. Módulo / Contenedor Hidropónico-Sustrato Moderno -->
+                            <g id="gh-planter-module">
+                                <!-- Marco exterior de la maceta inteligente -->
+                                <rect x="64" y="242" width="232" height="94" rx="14" fill="#1e293b" />
+                                <!-- Ventana de corte transversal del sustrato -->
+                                <rect x="72" y="248" width="216" height="80" rx="10" fill="url(#gh-soil-grad)" class="svg-transition" />
+
+                                <!-- Nivel de agua subterránea en el sustrato -->
+                                <rect id="gh-soil-water" x="72" y="280" width="216" height="48" rx="8" fill="#0284c7" opacity="0.45" class="svg-transition" />
+
+                                <!-- Grietas de sequía (cuando falta riego) -->
+                                <g id="gh-soil-cracks" opacity="0" stroke="#451a03" stroke-width="2.2" stroke-linecap="round" fill="none" class="svg-transition">
+                                    <path d="M 96 250 L 104 268 L 94 285" />
+                                    <path d="M 138 250 L 130 272 L 140 290" />
+                                    <path d="M 224 250 L 232 269 L 222 286" />
+                                    <path d="M 262 250 L 255 270" />
+                                </g>
+
+                                <!-- Sistema Radicular -->
+                                <g id="gh-roots" stroke="#fde68a" stroke-width="2.6" stroke-linecap="round" fill="none" class="svg-transition">
+                                    <path d="M 180 250 Q 164 274 146 292" />
+                                    <path d="M 180 250 Q 180 280 180 302" />
+                                    <path d="M 180 250 Q 196 274 214 292" />
+                                    <path d="M 168 266 Q 152 272 138 270" />
+                                    <path d="M 192 266 Q 208 272 222 270" />
+                                </g>
+
+                                <!-- Tubérculos Subterráneos (Cultivo de Papa) -->
+                                <g id="gh-potatoes" opacity="0" class="svg-transition">
+                                    <ellipse cx="150" cy="286" rx="14" ry="9" fill="#d97706" stroke="#92400e" stroke-width="1.5" />
+                                    <ellipse cx="210" cy="288" rx="15" ry="10" fill="#d97706" stroke="#92400e" stroke-width="1.5" />
+                                    <ellipse cx="180" cy="304" rx="13" ry="8" fill="#b45309" stroke="#78350f" stroke-width="1.5" />
+                                </g>
+                            </g>
+
+                            <!-- 9. PLANTA PRINCIPAL (Escala, inclinación, color y frutos) -->
+                            <g id="gh-plant-anchor" transform="translate(180, 248)">
+                                <g id="gh-plant-body" transform="scale(0.65) rotate(0)" class="svg-transition">
+                                    <!-- Tallo principal -->
+                                    <rect id="gh-stem" x="-4.5" y="-102" width="9" height="102" rx="4.5" fill="#16a34a" class="svg-transition" />
+
+                                    <!-- Follaje estándar (Tomate / Papa / Fresa) -->
+                                    <g id="gh-foliage-standard" fill="#22c55e" class="svg-transition">
+                                        <ellipse cx="-26" cy="-34" rx="24" ry="10.5" transform="rotate(-14 -26 -34)" />
+                                        <ellipse cx="26" cy="-38" rx="24" ry="10.5" transform="rotate(14 26 -38)" />
+                                        <ellipse cx="-30" cy="-68" rx="27" ry="11.5" transform="rotate(-10 -30 -68)" />
+                                        <ellipse cx="30" cy="-72" rx="27" ry="11.5" transform="rotate(10 30 -72)" />
+                                        <circle cx="0" cy="-104" r="23" />
+                                        <circle cx="-17" cy="-93" r="15.5" />
+                                        <circle cx="17" cy="-93" r="15.5" />
+                                    </g>
+
+                                    <!-- Follaje frondoso de Lechuga -->
+                                    <g id="gh-foliage-lettuce" opacity="0" class="svg-transition">
+                                        <ellipse cx="-26" cy="-30" rx="28" ry="23" transform="rotate(-18 -26 -30)" fill="#16a34a" />
+                                        <ellipse cx="26" cy="-30" rx="28" ry="23" transform="rotate(18 26 -30)" fill="#16a34a" />
+                                        <ellipse cx="0" cy="-38" rx="30" ry="27" fill="#22c55e" />
+                                        <ellipse cx="-12" cy="-36" rx="19" ry="21" fill="#4ade80" />
+                                        <ellipse cx="12" cy="-36" rx="19" ry="21" fill="#4ade80" />
+                                    </g>
+
+                                    <!-- Esporas / Manchas de Hongos (Humedad excesiva + Calor) -->
+                                    <g id="gh-fungus-spots" opacity="0" fill="#713f12" class="svg-transition">
+                                        <circle cx="-24" cy="-66" r="3.5" />
+                                        <circle cx="26" cy="-70" r="4" />
+                                        <circle cx="-8" cy="-102" r="3.5" />
+                                        <circle cx="15" cy="-92" r="3" />
+                                        <circle cx="0" cy="-44" r="4" />
+                                    </g>
+
+                                    <!-- Frutos (Tomates o Fresas) -->
+                                    <g id="gh-fruits" opacity="0" class="svg-transition">
+                                        <circle cx="-22" cy="-62" r="7.5" fill="#ef4444" />
+                                        <circle cx="24" cy="-66" r="7.5" fill="#ef4444" />
+                                        <circle cx="-11" cy="-98" r="7" fill="#ef4444" />
+                                        <circle cx="15" cy="-93" r="7" fill="#ef4444" />
+                                    </g>
+                                </g>
+                            </g>
+
+                            <!-- 10. Agua de Inundación Superficial + Burbujas de Asfixia (Exceso de riego) -->
+                            <g id="gh-flood-layer">
+                                <rect id="gh-flood-water" x="72" y="248" width="216" height="0" rx="4" fill="#0ea5e9" opacity="0.62" class="svg-transition" />
+                                <g id="gh-flood-bubbles" opacity="0" fill="#e0f2fe" class="svg-transition">
+                                    <circle cx="105" cy="242" r="3" class="anim-bubble" />
+                                    <circle cx="145" cy="239" r="4" class="anim-bubble" style="animation-delay: 0.45s" />
+                                    <circle cx="215" cy="241" r="3.5" class="anim-bubble" style="animation-delay: 0.95s" />
+                                    <circle cx="255" cy="243" r="3" class="anim-bubble" style="animation-delay: 1.4s" />
+                                </g>
+                            </g>
+
+                            <!-- 11. Cristales de Escarcha / Helada (Temperatura baja) -->
+                            <g id="gh-frost-layer" opacity="0" class="svg-transition">
+                                <rect x="24" y="55" width="312" height="280" rx="16" fill="#bae6fd" opacity="0.28" />
+                                <g stroke="#0284c7" stroke-width="1.8" stroke-linecap="round" class="anim-frost">
+                                    <!-- Copo 1 -->
+                                    <line x1="80" y1="110" x2="80" y2="126" />
+                                    <line x1="72" y1="118" x2="88" y2="118" />
+                                    <line x1="74" y1="112" x2="86" y2="124" />
+                                    <line x1="86" y1="112" x2="74" y2="124" />
+                                    <!-- Copo 2 -->
+                                    <line x1="255" y1="115" x2="255" y2="131" />
+                                    <line x1="247" y1="123" x2="263" y2="123" />
+                                    <line x1="249" y1="117" x2="261" y2="129" />
+                                    <line x1="261" y1="117" x2="249" y2="129" />
+                                    <!-- Copo 3 -->
+                                    <line x1="125" y1="175" x2="125" y2="189" />
+                                    <line x1="118" y1="182" x2="132" y2="182" />
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <!-- Barra de Progreso de Crecimiento (Semanas 1 a 4) -->
+                    <div class="bg-slate-50 rounded-xl border border-slate-200/80 p-3.5 space-y-2">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="font-bold text-slate-700">Progreso del Ciclo Agronómico</span>
+                            <span id="growth-percent" class="font-mono font-bold text-emerald-600">25%</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                            <div id="growth-bar" class="h-full bg-emerald-500 rounded-full transition-all duration-500" style="width: 25%"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] font-mono text-slate-400 pt-0.5">
+                            <span>Sem 1: Plántula</span>
+                            <span>Sem 2: Follaje</span>
+                            <span>Sem 3: Flor/Fruto</span>
+                            <span>Sem 4: Cosecha</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===============================================================
+                 PANEL DERECHO (3 cols): Ficha Didáctica del Cultivo
+            ================================================================ -->
+            <aside class="lg:col-span-3 bg-white rounded-2xl border border-slate-200 p-5 space-y-5">
+                <!-- Cabecera Botánica -->
+                <div class="flex items-start gap-3 border-b border-slate-100 pb-4">
+                    <div id="doc-emoji" class="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-2xl shrink-0">
+                        🍅
+                    </div>
+                    <div class="min-w-0">
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-600">Ficha Agronómica</span>
+                        <h2 id="doc-nombre" class="text-base font-extrabold text-slate-900 leading-tight mt-0.5">Tomate</h2>
+                        <p id="doc-cientifico" class="text-xs italic text-slate-400 truncate">Solanum lycopersicum</p>
+                    </div>
+                </div>
+
+                <!-- Descripción Botánica -->
+                <div class="space-y-1.5">
+                    <h3 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Descripción Botánica</h3>
+                    <p id="doc-descripcion" class="text-xs text-slate-600 leading-relaxed">
+                        Planta herbácea de porte arbustivo perteneciente a la familia Solanaceae. Desarrolla un sistema radicular fibroso muy sensible a la falta de oxígeno en suelos saturados.
+                    </p>
+                </div>
+
+                <!-- Tarjetas de Rangos Ideales -->
+                <div class="space-y-2">
+                    <h3 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Parámetros Óptimos</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between p-2.5 rounded-xl bg-cyan-50/70 border border-cyan-100">
+                            <span class="text-xs font-semibold text-cyan-900">💧 Riego Suelo</span>
+                            <span id="doc-rango-riego" class="font-mono text-xs font-bold text-cyan-800">50% – 70%</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2.5 rounded-xl bg-amber-50/70 border border-amber-100">
+                            <span class="text-xs font-semibold text-amber-900">🌡️ Temperatura</span>
+                            <span id="doc-rango-temp" class="font-mono text-xs font-bold text-amber-800">20°C – 28°C</span>
+                        </div>
+                        <div class="flex items-center justify-between p-2.5 rounded-xl bg-teal-50/70 border border-teal-100">
+                            <span class="text-xs font-semibold text-teal-900">☁️ Humedad Aire</span>
+                            <span id="doc-rango-humedad" class="font-mono text-xs font-bold text-teal-800">60% – 75%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tiempo de Cosecha y Riesgo Principal -->
+                <div class="grid grid-cols-1 gap-2.5 pt-1">
+                    <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                        <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">⏱️ Ciclo de Cosecha</div>
+                        <div id="doc-ciclo" class="text-xs font-bold text-slate-800 mt-0.5">4 Semanas simuladas (75–90 días reales)</div>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-rose-50/70 border border-rose-200/80">
+                        <div class="text-[10px] font-bold uppercase tracking-wider text-rose-600">⚠️ Riesgo Principal</div>
+                        <p id="doc-riesgo" class="text-xs text-rose-950/85 mt-0.5 leading-relaxed">
+                            Asfixia radicular por encharcamiento (>70% riego) y aparición de hongos foliares si la humedad supera el 75% con calor.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Consejo Agronómico Práctico -->
+                <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200/80 space-y-1">
+                    <div class="text-[11px] font-extrabold text-emerald-800 flex items-center gap-1.5">
+                        <span>💡</span>
+                        <span>Consejo Agronómico</span>
+                    </div>
+                    <p id="doc-consejo" class="text-xs text-emerald-950/85 leading-relaxed">
+                        Aplica riego localizado en la base del tallo sin mojar el follaje y mantén una ventilación constante para evitar condensación.
+                    </p>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- =====================================================================
+         3. MODAL DE REPORTE SEMANAL / COSECHA (SIN ALERT())
+    ====================================================================== -->
+    <div id="report-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl border border-slate-200 max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div class="flex items-center gap-3.5">
+                <div id="modal-badge-icon" class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl shrink-0">
+                    🌱
+                </div>
+                <div>
+                    <span id="modal-tag" class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-600">Reporte de Ciclo</span>
+                    <h3 id="modal-heading" class="text-lg font-extrabold text-slate-900 leading-tight">Avance Semanal</h3>
+                </div>
+            </div>
+            <p id="modal-text" class="text-sm text-slate-600 bg-slate-50 border border-slate-200/80 rounded-2xl p-4 leading-relaxed">
+                Tu cultivo ha avanzado exitosamente.
+            </p>
+            <div class="flex justify-end pt-1">
+                <button type="button" onclick="cerrarModal()"
+                    class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-colors">
+                    Continuar Monitoreo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         4. LÓGICA JAVASCRIPT (TELEMETRÍA, AUDIO, SVG Y PERSISTENCIA)
+    ====================================================================== -->
+    <script>
+        // Base de datos agronómica completa de los 4 cultivos
+        const CULTIVOS_DB = {
+            tomate: {
+                id: 'tomate',
+                nombre: 'Tomate',
+                cientifico: 'Solanum lycopersicum',
+                emoji: '🍅',
+                riego: { min: 50, max: 70, optimo: 60 },
+                temp: { min: 20, max: 28, optimo: 24 },
+                humedad: { min: 60, max: 75, optimo: 68 },
+                colorFruto: '#ef4444',
+                tieneFrutoAereo: true,
+                esTuberculo: false,
+                esLechuga: false,
+                descripcion: 'Planta herbácea de porte arbustivo perteneciente a la familia Solanaceae. Desarrolla un sistema radicular fibroso muy sensible a la falta de oxígeno en suelos saturados.',
+                ciclo: '4 Semanas simuladas (75–90 días reales)',
+                riesgo: 'Asfixia radicular por exceso de riego (>70%) y hongos foliares cuando la humedad supera el 75% en ambiente cálido.',
+                consejo: 'Aplica riego localizado directamente en la zona radicular sin mojar las hojas y asegura buena circulación de aire.'
+            },
+            lechuga: {
+                id: 'lechuga',
+                nombre: 'Lechuga',
+                cientifico: 'Lactuca sativa',
+                emoji: '🥬',
+                riego: { min: 60, max: 80, optimo: 70 },
+                temp: { min: 14, max: 21, optimo: 18 },
+                humedad: { min: 65, max: 85, optimo: 75 },
+                colorFruto: '#22c55e',
+                tieneFrutoAereo: false,
+                esTuberculo: false,
+                esLechuga: true,
+                descripcion: 'Hortaliza foliar de ciclo corto y raíces superficiales. Requiere disponibilidad hídrica constante y temperaturas frescas para formar cogollos tiernos.',
+                ciclo: '4 Semanas simuladas (45–60 días reales)',
+                riesgo: 'El calor superior a 21°C induce espigado prematuro y sabor amargo; el encharcamiento (>80%) pudre el cuello de la planta.',
+                consejo: 'Mantén el sustrato fresco y uniformemente húmedo sin inundar la base de las hojas inferiores.'
+            },
+            papa: {
+                id: 'papa',
+                nombre: 'Papa',
+                cientifico: 'Solanum tuberosum',
+                emoji: '🥔',
+                riego: { min: 40, max: 60, optimo: 50 },
+                temp: { min: 15, max: 22, optimo: 18 },
+                humedad: { min: 60, max: 80, optimo: 70 },
+                colorFruto: '#d97706',
+                tieneFrutoAereo: false,
+                esTuberculo: true,
+                esLechuga: false,
+                descripcion: 'Planta tuberosa cuyos tallos subterráneos engrosan para almacenar almidón. Exige suelos sueltos, profundos y con excelente drenaje.',
+                ciclo: '4 Semanas simuladas (90–110 días reales)',
+                riesgo: 'La pudrición blanda del tubérculo ocurre rápidamente si el riego supera el 60% y desplaza el aire del sustrato.',
+                consejo: 'Evita riegos pesados y mantén el sustrato oxigenado para favorecer el engrosamiento sano de los tubérculos.'
+            },
+            fresa: {
+                id: 'fresa',
+                nombre: 'Fresa',
+                cientifico: 'Fragaria × ananassa',
+                emoji: '🍓',
+                riego: { min: 55, max: 75, optimo: 65 },
+                temp: { min: 16, max: 24, optimo: 20 },
+                humedad: { min: 60, max: 75, optimo: 68 },
+                colorFruto: '#f43f5e',
+                tieneFrutoAereo: true,
+                esTuberculo: false,
+                esLechuga: false,
+                descripcion: 'Planta perenne rastrera de corona corta y raíces superficiales. Produce frutos aromáticos altamente sensibles a la humedad excesiva.',
+                ciclo: '4 Semanas simuladas (60–80 días reales)',
+                riesgo: 'Moho gris (Botrytis) en frutos cuando la humedad relativa supera el 75% y asfixia radicular por riegos superiores al 75%.',
+                consejo: 'Utiliza acolchado para aislar los frutos del sustrato húmedo y controla estrictamente la humedad ambiental.'
+            }
+        };
+
+        // Estado activo de la sesión y simulación
+        let appState = {
+            usuario: 'Daniel Camargo',
+            parcela: 'Invernadero Norte',
+            profileKey: 'daniel_camargo',
+            cultivo: 'tomate',
+            semana: 1,
+            cosechas: 0,
+            riego: 60,
+            temp: 24,
+            humedad: 68,
+            audioEnabled: true,
+            ultimoEstadoAlerta: 'optimo'
+        };
+
+        const STORAGE_PREFIX = 'agrosim_pro_v2_';
+        const UMBRALES_CRITICOS = {
+            riego: { bajo: 14, alto: 10 },
+            temp: { bajo: 4, alto: 4 },
+            humedad: { bajo: null, alto: null }
+        };
+
+        // =====================================================================
+        // SINTETIZADOR DE AUDIO (WEB AUDIO API)
+        // =====================================================================
+        let audioCtx = null;
+
+        function playFeedbackSound(type) {
+            if (!appState.audioEnabled) return;
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+                if (type === 'danger') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(310, now);
+                    osc.frequency.setValueAtTime(220, now + 0.14);
+                    gain.gain.setValueAtTime(0.11, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
+                    osc.start(now);
+                    osc.stop(now + 0.33);
+                } else if (type === 'success') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.11);
+                    osc.frequency.setValueAtTime(783.99, now + 0.22);
+                    gain.gain.setValueAtTime(0.09, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.42);
+                    osc.start(now);
+                    osc.stop(now + 0.43);
+                }
+            } catch (err) {
+                // Silenciar errores si el navegador restringe audio automático
+            }
+        }
+
+        function toggleAudio() {
+            appState.audioEnabled = !appState.audioEnabled;
+            document.getElementById('icon-audio').textContent = appState.audioEnabled ? '🔊' : '🔇';
+            document.getElementById('text-audio').textContent = appState.audioEnabled ? 'Audio ON' : 'Silenciado';
+        }
+
+        // =====================================================================
+        // GESTIÓN DE SESIÓN Y PERSISTENCIA EN LOCALSTORAGE
+        // =====================================================================
+        function generarClavePerfil(nombre) {
+            return STORAGE_PREFIX + nombre.toLowerCase().trim().replace(/[^a-z0-9]+/g, '_');
+        }
+
+        function guardarPerfilLocal() {
+            try {
+                const payload = {
+                    usuario: appState.usuario,
+                    parcela: appState.parcela,
+                    cultivo: appState.cultivo,
+                    semana: appState.semana,
+                    cosechas: appState.cosechas,
+                    riego: appState.riego,
+                    temp: appState.temp,
+                    humedad: appState.humedad
+                };
+                localStorage.setItem(appState.profileKey, JSON.stringify(payload));
+            } catch (e) {
+                // Ignorar si localStorage no está disponible
+            }
+        }
+
+        function cargarPerfilLocal(key) {
+            try {
+                const raw = localStorage.getItem(key);
+                if (!raw) return null;
+
+                const perfil = JSON.parse(raw);
+                if (!perfil || typeof perfil !== 'object' || Array.isArray(perfil)) return null;
+
+                const cultivo = typeof perfil.cultivo === 'string' &&
+                    Object.prototype.hasOwnProperty.call(CULTIVOS_DB, perfil.cultivo)
+                    ? perfil.cultivo
+                    : 'tomate';
+                const c = CULTIVOS_DB[cultivo];
+                const normalizarNumero = (valor, min, max, predeterminado) => {
+                    if (valor === null || valor === undefined || valor === '') return predeterminado;
+                    const numero = Number(valor);
+                    return Number.isFinite(numero)
+                        ? Math.max(min, Math.min(max, Math.round(numero)))
+                        : predeterminado;
+                };
+
+                return {
+                    parcela: typeof perfil.parcela === 'string' ? perfil.parcela : '',
+                    cultivo,
+                    semana: normalizarNumero(perfil.semana, 1, 4, 1),
+                    cosechas: normalizarNumero(perfil.cosechas, 0, Number.MAX_SAFE_INTEGER, 0),
+                    riego: normalizarNumero(perfil.riego, 0, 100, c.riego.optimo),
+                    temp: normalizarNumero(perfil.temp, 5, 40, c.temp.optimo),
+                    humedad: normalizarNumero(perfil.humedad, 20, 100, c.humedad.optimo)
+                };
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function manejarLogin(event) {
+            event.preventDefault();
+            const nombre = document.getElementById('login-nombre').value.trim();
+            const parcela = document.getElementById('login-parcela').value.trim();
+            if (!nombre) return;
+
+            const key = generarClavePerfil(nombre);
+            const guardado = cargarPerfilLocal(key);
+
+            appState.usuario = nombre;
+            appState.parcela = parcela || `Invernadero de ${nombre}`;
+            appState.profileKey = key;
+
+            if (guardado) {
+                appState.parcela = parcela || guardado.parcela || `Invernadero de ${nombre}`;
+                appState.cultivo = guardado.cultivo;
+                appState.semana = guardado.semana;
+                appState.cosechas = guardado.cosechas;
+                appState.riego = guardado.riego;
+                appState.temp = guardado.temp;
+                appState.humedad = guardado.humedad;
+
+                aplicarEstadoEnUI(false);
+            } else {
+                appState.cultivo = 'tomate';
+                appState.semana = 1;
+                appState.cosechas = 0;
+                seleccionarCultivo('tomate', true);
+            }
+
+            actualizarHeaderBadge();
+            document.getElementById('login-view').classList.add('hidden');
+        }
+
+        function iniciarModoDemo() {
+            appState.usuario = 'Agricultor Demo';
+            appState.parcela = 'Módulo Experimental #01';
+            appState.profileKey = generarClavePerfil('demo_guest');
+            appState.cultivo = 'tomate';
+            appState.semana = 1;
+            appState.cosechas = 0;
+
+            actualizarHeaderBadge();
+            seleccionarCultivo('tomate', true);
+            document.getElementById('login-view').classList.add('hidden');
+        }
+
+        function cerrarSesion() {
+            guardarPerfilLocal();
+            document.getElementById('login-view').classList.remove('hidden');
+        }
+
+        function actualizarHeaderBadge() {
+            document.getElementById('badge-usuario').textContent = appState.usuario;
+            document.getElementById('badge-parcela').textContent = appState.parcela;
+        }
+
+        // =====================================================================
+        // SELECCIÓN DE CULTIVO Y CALIBRACIÓN
+        // =====================================================================
+        function seleccionarCultivo(cultivoId, resetToOptimo = true) {
+            appState.cultivo = cultivoId;
+            const c = CULTIVOS_DB[cultivoId];
+
+            if (resetToOptimo) {
+                appState.semana = 1;
+                appState.riego = c.riego.optimo;
+                appState.temp = c.temp.optimo;
+                appState.humedad = c.humedad.optimo;
+            }
+
+            aplicarEstadoEnUI(false);
+            guardarPerfilLocal();
+        }
+
+        function aplicarEstadoEnUI(conSonido = false) {
+            const c = CULTIVOS_DB[appState.cultivo];
+
+            // Actualizar tarjetas del selector de cultivos
+            document.querySelectorAll('.crop-card').forEach(card => {
+                card.classList.remove('border-2', 'border-emerald-500', 'bg-emerald-50/40');
+                card.classList.add('border', 'border-slate-200', 'bg-white');
+            });
+            const activeCard = document.getElementById(`card-cultivo-${c.id}`);
+            if (activeCard) {
+                activeCard.classList.remove('border', 'border-slate-200', 'bg-white');
+                activeCard.classList.add('border-2', 'border-emerald-500', 'bg-emerald-50/40');
+            }
+
+            // Sincronizar valores de sliders
+            document.getElementById('slider-riego').value = appState.riego;
+            document.getElementById('slider-temp').value = appState.temp;
+            document.getElementById('slider-humedad').value = appState.humedad;
+
+            // Etiquetas de rangos óptimos
+            document.getElementById('optimo-riego-label').textContent = `Óptimo: ${c.riego.min}–${c.riego.max}%`;
+            document.getElementById('optimo-temp-label').textContent = `Óptimo: ${c.temp.min}–${c.temp.max}°C`;
+            document.getElementById('optimo-humedad-label').textContent = `Óptimo: ${c.humedad.min}–${c.humedad.max}%`;
+
+            // Actualizar Ficha Didáctica
+            document.getElementById('doc-emoji').textContent = c.emoji;
+            document.getElementById('doc-nombre').textContent = c.nombre;
+            document.getElementById('doc-cientifico').textContent = c.cientifico;
+            document.getElementById('doc-descripcion').textContent = c.descripcion;
+            document.getElementById('doc-rango-riego').textContent = `${c.riego.min}% – ${c.riego.max}%`;
+            document.getElementById('doc-rango-temp').textContent = `${c.temp.min}°C – ${c.temp.max}°C`;
+            document.getElementById('doc-rango-humedad').textContent = `${c.humedad.min}% – ${c.humedad.max}%`;
+            document.getElementById('doc-ciclo').textContent = c.ciclo;
+            document.getElementById('doc-riesgo').textContent = c.riesgo;
+            document.getElementById('doc-consejo').textContent = c.consejo;
+
+            actualizarTodo(conSonido);
+        }
+
+        function calibrarOptimos() {
+            const c = CULTIVOS_DB[appState.cultivo];
+            appState.riego = c.riego.optimo;
+            appState.temp = c.temp.optimo;
+            appState.humedad = c.humedad.optimo;
+
+            document.getElementById('slider-riego').value = appState.riego;
+            document.getElementById('slider-temp').value = appState.temp;
+            document.getElementById('slider-humedad').value = appState.humedad;
+
+            actualizarTodo(false);
+            guardarPerfilLocal();
+        }
+
+        function reiniciarCultivoActual() {
+            appState.semana = 1;
+            calibrarOptimos();
+        }
+
+        // =====================================================================
+        // MOTOR EN TIEMPO REAL: TELEMETRÍA, ALERTAS E INVERNADERO SVG
+        // =====================================================================
+        function actualizarTodo(conSonido = false) {
+            const c = CULTIVOS_DB[appState.cultivo];
+            appState.riego = parseInt(document.getElementById('slider-riego').value, 10);
+            appState.temp = parseInt(document.getElementById('slider-temp').value, 10);
+            appState.humedad = parseInt(document.getElementById('slider-humedad').value, 10);
+
+            // Actualizar lecturas numéricas y barras dinámicas de sliders
+            actualizarEstiloSlider('riego', appState.riego, 0, 100, c.riego.min, c.riego.max, `${appState.riego}%`);
+            actualizarEstiloSlider('temp', appState.temp, 5, 40, c.temp.min, c.temp.max, `${appState.temp}°C`);
+            actualizarEstiloSlider('humedad', appState.humedad, 20, 100, c.humedad.min, c.humedad.max, `${appState.humedad}%`);
+
+            // Actualizar contadores en header y sensores SVG
+            document.getElementById('header-semana').textContent = `Semana ${appState.semana} / 4`;
+            document.getElementById('header-cosechas').textContent = appState.cosechas;
+            document.getElementById('svg-txt-riego').textContent = `${appState.riego}%`;
+            document.getElementById('svg-txt-temp').textContent = `${appState.temp}°C`;
+            document.getElementById('svg-txt-hum').textContent = `H:${appState.humedad}%`;
+
+            // Evaluar diagnóstico agronómico
+            const diag = diagnosticarMicroclima(c, appState.riego, appState.temp, appState.humedad);
+
+            // Reproducir tono de alerta si entra en peligro crítico nuevo
+            if (conSonido && diag.nivel === 'peligro' && appState.ultimoEstadoAlerta !== diag.codigo) {
+                playFeedbackSound('danger');
+            }
+            appState.ultimoEstadoAlerta = diag.codigo;
+
+            // Actualizar Banner de Alertas
+            renderizarBannerAlerta(diag);
+
+            // Actualizar Invernadero Inteligente SVG
+            renderizarInvernaderoSVG(c, appState.riego, appState.temp, appState.humedad, diag);
+
+            // Actualizar barra de crecimiento (Semanas 1 a 4)
+            const porcentajeCrecimiento = Math.min(100, appState.semana * 25);
+            document.getElementById('growth-percent').textContent = `${porcentajeCrecimiento}%`;
+            document.getElementById('growth-bar').style.width = `${porcentajeCrecimiento}%`;
+
+            const nombresEtapa = {
+                1: 'Etapa 1/4 • Plántula',
+                2: 'Etapa 2/4 • Desarrollo Foliar',
+                3: 'Etapa 3/4 • Floración / Fructificación',
+                4: 'Etapa 4/4 • Madurez de Cosecha'
+            };
+            document.getElementById('stage-badge').textContent = nombresEtapa[appState.semana] || 'Etapa 1/4 • Plántula';
+
+            guardarPerfilLocal();
+        }
+
+        function actualizarEstiloSlider(tipo, valor, minTotal, maxTotal, optMin, optMax, textoValor) {
+            const slider = document.getElementById(`slider-${tipo}`);
+            const readout = document.getElementById(`readout-${tipo}`);
+            const pct = ((valor - minTotal) / (maxTotal - minTotal)) * 100;
+            const estado = clasificarParametro(tipo, valor, { min: optMin, max: optMax });
+
+            let colorHex = '#10b981'; // Emerald (Óptimo)
+            let badgeClass = 'font-mono text-sm font-bold px-2.5 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200';
+
+            if (estado.nivel === 'peligro') {
+                colorHex = '#f43f5e'; // Rose (Peligro)
+                badgeClass = 'font-mono text-sm font-bold px-2.5 py-0.5 rounded-lg bg-rose-50 text-rose-700 border border-rose-200';
+            } else if (estado.nivel === 'precaucion') {
+                colorHex = '#f59e0b'; // Amber (Precaución)
+                badgeClass = 'font-mono text-sm font-bold px-2.5 py-0.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-200';
+            }
+
+            slider.style.setProperty('--thumb-color', colorHex);
+            slider.style.background = `linear-gradient(to right, ${colorHex} 0%, ${colorHex} ${pct}%, #e2e8f0 ${pct}%, #e2e8f0 100%)`;
+            readout.className = badgeClass;
+            readout.textContent = textoValor;
+        }
+
+        function clasificarParametro(tipo, valor, rango) {
+            const direccion = valor < rango.min ? 'bajo' : valor > rango.max ? 'alto' : null;
+            if (!direccion) return { nivel: 'optimo', direccion: null };
+
+            const margen = UMBRALES_CRITICOS[tipo][direccion];
+            const esPeligro = margen !== null && (
+                direccion === 'bajo'
+                    ? valor < rango.min - margen
+                    : valor > rango.max + margen
+            );
+
+            return { nivel: esPeligro ? 'peligro' : 'precaucion', direccion };
+        }
+
+        function diagnosticarMicroclima(c, riego, temp, humedad) {
+            const estadoRiego = clasificarParametro('riego', riego, c.riego);
+            const estadoTemp = clasificarParametro('temp', temp, c.temp);
+            const estadoHumedad = clasificarParametro('humedad', humedad, c.humedad);
+            let penalizacion = 0;
+            if (riego < c.riego.min) penalizacion += (c.riego.min - riego) * 1.6;
+            if (riego > c.riego.max) penalizacion += (riego - c.riego.max) * 2.0;
+            if (temp < c.temp.min) penalizacion += (c.temp.min - temp) * 3.2;
+            if (temp > c.temp.max) penalizacion += (temp - c.temp.max) * 3.5;
+            if (humedad < c.humedad.min) penalizacion += (c.humedad.min - humedad) * 0.9;
+            if (humedad > c.humedad.max) penalizacion += (humedad - c.humedad.max) * 1.4;
+
+            const vitalidad = Math.max(0, Math.min(100, Math.round(100 - penalizacion)));
+
+            // 1. Peligro de Ahogamiento (Exceso de riego)
+            if (estadoRiego.nivel === 'peligro' && estadoRiego.direccion === 'alto') {
+                return {
+                    nivel: 'peligro',
+                    codigo: 'ahogamiento',
+                    vitalidad,
+                    pill: 'Peligro Crítico',
+                    titulo: '⚠️ PELIGRO DE AHOGAMIENTO RADICULAR',
+                    desc: `El exceso de agua (${riego}%, óptimo ${c.riego.min}–${c.riego.max}%) desplaza el oxígeno del sustrato, asfixiando y pudriendo las raíces de ${c.nombre.toLowerCase()}.`
+                };
+            }
+
+            // 2. Peligro de Sequía (Falta de riego)
+            if (estadoRiego.nivel === 'peligro' && estadoRiego.direccion === 'bajo') {
+                return {
+                    nivel: 'peligro',
+                    codigo: 'sequia',
+                    vitalidad,
+                    pill: 'Peligro Crítico',
+                    titulo: '🏜️ ALERTA DE ESTRÉS HÍDRICO SEVERO',
+                    desc: `El sustrato está críticamente seco (${riego}%). El cultivo pierde turgencia celular, se agrieta el suelo y se marchita.`
+                };
+            }
+
+            // 3. Peligro por Golpe de Calor
+            if (estadoTemp.nivel === 'peligro' && estadoTemp.direccion === 'alto') {
+                return {
+                    nivel: 'peligro',
+                    codigo: 'calor',
+                    vitalidad,
+                    pill: 'Peligro Crítico',
+                    titulo: '🔥 GOLPE DE CALOR EN INVERNADERO',
+                    desc: `Temperatura crítica de ${temp}°C (máximo recomendado ${c.temp.max}°C). Se produce quemadura foliar y cierre estomático.`
+                };
+            }
+
+            // 4. Peligro por Helada / Frío Extremo
+            if (estadoTemp.nivel === 'peligro' && estadoTemp.direccion === 'bajo') {
+                return {
+                    nivel: 'peligro',
+                    codigo: 'helada',
+                    vitalidad,
+                    pill: 'Peligro Crítico',
+                    titulo: '❄️ RIESGO DE CONGELACIÓN Y HELADA',
+                    desc: `Temperatura descendente a ${temp}°C. Se forman cristales de escarcha que dañan los tejidos vasculares de la planta.`
+                };
+            }
+
+            // 5. Alerta de Hongos (Humedad excesiva + Calor)
+            if (humedad > c.humedad.max && temp > c.temp.max - 2) {
+                return {
+                    nivel: 'precaucion',
+                    codigo: 'hongos',
+                    vitalidad,
+                    pill: 'Precaución Fitosanitaria',
+                    titulo: '🍄 RIESGO ALTO DE HONGOS Y MOHO',
+                    desc: `Humedad elevada (${humedad}%) combinada con temperatura alta (${temp}°C) favorece esporas de hongos sobre las hojas.`
+                };
+            }
+
+            // 6. Precaución leve fuera de algún rango óptimo
+            if ([estadoRiego, estadoTemp, estadoHumedad].some(estado => estado.nivel !== 'optimo')) {
+                
+                const alertas = [];
+                if (riego > c.riego.max) alertas.push('riego ligeramente elevado');
+                if (riego < c.riego.min) alertas.push('riego por debajo del ideal');
+                if (temp > c.temp.max) alertas.push('temperatura alta');
+                if (temp < c.temp.min) alertas.push('ambiente fresco');
+                if (humedad > c.humedad.max) alertas.push('humedad ambiental alta');
+                if (humedad < c.humedad.min) alertas.push('aire seco');
+
+                return {
+                    nivel: 'precaucion',
+                    codigo: 'precaucion_leve',
+                    vitalidad,
+                    pill: 'Precaución',
+                    titulo: '⚡ PARÁMETROS FUERA DE RANGO ÓPTIMO',
+                    desc: `Se detecta ${alertas.join(', ')}. El crecimiento será más lento hasta recalibrar el microclima.`
+                };
+            }
+
+            // 7. Estado Óptimo
+            return {
+                nivel: 'optimo',
+                codigo: 'optimo',
+                vitalidad: 100,
+                pill: 'Condición Óptima',
+                titulo: '✅ MICROCLIMA EN EQUILIBRIO IDEAL',
+                desc: `Riego (${riego}%), temperatura (${temp}°C) y humedad (${humedad}%) están en la zona óptima para ${c.nombre.toLowerCase()}.`
+            };
+        }
+
+        function renderizarBannerAlerta(diag) {
+            const banner = document.getElementById('alert-banner');
+            const iconBox = document.getElementById('alert-icon-box');
+            const pill = document.getElementById('alert-status-pill');
+            const vitality = document.getElementById('alert-vitality');
+            const title = document.getElementById('alert-title');
+            const desc = document.getElementById('alert-desc');
+            const ledRiego = document.getElementById('led-sensor-riego');
+            const ledClima = document.getElementById('led-sensor-clima');
+            const estilos = {
+                optimo: {
+                    banner: 'border border-emerald-300 bg-emerald-50/90',
+                    icono: 'bg-emerald-600',
+                    simbolo: '✓',
+                    pill: 'bg-emerald-200/80 text-emerald-900',
+                    vitalidad: 'text-emerald-800',
+                    titulo: 'text-emerald-950',
+                    descripcion: 'text-emerald-900/85',
+                    led: '#10b981'
+                },
+                precaucion: {
+                    banner: 'border border-amber-300 bg-amber-50/95',
+                    icono: 'bg-amber-500',
+                    simbolo: '!',
+                    pill: 'bg-amber-200/80 text-amber-950',
+                    vitalidad: 'text-amber-800',
+                    titulo: 'text-amber-950',
+                    descripcion: 'text-amber-900/90',
+                    led: '#f59e0b'
+                },
+                peligro: {
+                    banner: 'border-2 border-rose-400 bg-rose-50 alert-danger-ring',
+                    icono: 'bg-rose-600',
+                    simbolo: '✕',
+                    pill: 'bg-rose-200 text-rose-950',
+                    vitalidad: 'text-rose-800',
+                    titulo: 'text-rose-950',
+                    descripcion: 'text-rose-900/90',
+                    led: '#f43f5e'
+                }
+            };
+            const estilo = estilos[diag.nivel] || estilos.peligro;
+
+            vitality.textContent = `Vitalidad: ${diag.vitalidad}%`;
+            pill.textContent = diag.pill;
+            title.textContent = diag.titulo;
+            desc.textContent = diag.desc;
+
+            banner.className = `rounded-2xl ${estilo.banner} p-4 transition-all`;
+            iconBox.className = `w-10 h-10 rounded-xl ${estilo.icono} text-white flex items-center justify-center text-lg font-bold shrink-0`;
+            iconBox.textContent = estilo.simbolo;
+            pill.className = `text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md ${estilo.pill}`;
+            vitality.className = `font-mono text-xs font-bold ${estilo.vitalidad}`;
+            title.className = `text-sm font-extrabold ${estilo.titulo} mt-1`;
+            desc.className = `text-xs ${estilo.descripcion} mt-0.5 leading-relaxed`;
+            [ledRiego, ledClima].forEach(led => led.setAttribute('fill', estilo.led));
+        }
+
+        function renderizarInvernaderoSVG(c, riego, temp, humedad, diag) {
+            // 1. Nivel de agua en sustrato e inundación superficial
+            const subWaterH = Math.min(80, (riego / 100) * 80);
+            const soilWater = document.getElementById('gh-soil-water');
+            soilWater.setAttribute('y', 328 - subWaterH);
+            soilWater.setAttribute('height', subWaterH);
+
+            // Gotas de riego activo
+            document.getElementById('gh-water-drops').setAttribute('opacity', riego > 15 ? '0.85' : '0');
+
+            // Inundación superficial cuando supera el rango óptimo de riego
+            const floodWater = document.getElementById('gh-flood-water');
+            const floodBubbles = document.getElementById('gh-flood-bubbles');
+            if (riego > c.riego.max) {
+                const exceso = Math.min(1, (riego - c.riego.max) / (100 - c.riego.max));
+                const floodH = 8 + exceso * 28;
+                floodWater.setAttribute('y', 248 - floodH);
+                floodWater.setAttribute('height', floodH);
+                floodBubbles.setAttribute('opacity', riego > c.riego.max + 10 ? '1' : '0.45');
+            } else {
+                floodWater.setAttribute('y', 248);
+                floodWater.setAttribute('height', 0);
+                floodBubbles.setAttribute('opacity', '0');
+            }
+
+            // Color del sustrato y grietas de sequía
+            const soilTop = document.getElementById('gh-soil-top');
+            const soilBottom = document.getElementById('gh-soil-bottom');
+            const cracks = document.getElementById('gh-soil-cracks');
+
+            if (riego < c.riego.min - 8) {
+                soilTop.setAttribute('stop-color', '#d97706');
+                soilBottom.setAttribute('stop-color', '#92400e');
+                cracks.setAttribute('opacity', '0.95');
+            } else if (riego > c.riego.max + 8) {
+                soilTop.setAttribute('stop-color', '#3b1704');
+                soilBottom.setAttribute('stop-color', '#1c0a00');
+                cracks.setAttribute('opacity', '0');
+            } else {
+                soilTop.setAttribute('stop-color', '#78350f');
+                soilBottom.setAttribute('stop-color', '#451a03');
+                cracks.setAttribute('opacity', '0');
+            }
+
+            // 2. Efectos visuales de Temperatura
+            const skyTop = document.getElementById('gh-sky-top');
+            const skyBottom = document.getElementById('gh-sky-bottom');
+            const sunGroup = document.getElementById('gh-sun-group');
+            const sunCore = document.getElementById('gh-sun-core');
+            const sunHalo = document.getElementById('gh-sun-halo');
+            const heatWaves = document.getElementById('gh-heat-waves');
+            const frostLayer = document.getElementById('gh-frost-layer');
+
+            const sunScale = 0.7 + ((temp - 5) / 35) * 0.7;
+            sunGroup.setAttribute('transform', `translate(295, 72) scale(${sunScale.toFixed(2)})`);
+
+            if (temp > c.temp.max + 2) {
+                skyTop.setAttribute('stop-color', '#ffedd5');
+                skyBottom.setAttribute('stop-color', '#fff7ed');
+                sunCore.setAttribute('fill', '#ea580c');
+                sunHalo.setAttribute('fill', '#f97316');
+                sunHalo.setAttribute('opacity', '0.45');
+                heatWaves.setAttribute('opacity', '0.9');
+                frostLayer.setAttribute('opacity', '0');
+            } else if (temp < c.temp.min - 2) {
+                skyTop.setAttribute('stop-color', '#e0f2fe');
+                skyBottom.setAttribute('stop-color', '#f0f9ff');
+                sunCore.setAttribute('fill', '#fde047');
+                sunHalo.setAttribute('opacity', '0.15');
+                heatWaves.setAttribute('opacity', '0');
+                frostLayer.setAttribute('opacity', '1');
+            } else {
+                skyTop.setAttribute('stop-color', '#ecfeff');
+                skyBottom.setAttribute('stop-color', '#f8fafc');
+                sunCore.setAttribute('fill', '#f59e0b');
+                sunHalo.setAttribute('fill', '#f59e0b');
+                sunHalo.setAttribute('opacity', '0.22');
+                heatWaves.setAttribute('opacity', '0');
+                frostLayer.setAttribute('opacity', '0');
+            }
+
+            // 3. Efectos visuales de Humedad Relativa
+            const fogLayer = document.getElementById('gh-fog-layer');
+            const fungusSpots = document.getElementById('gh-fungus-spots');
+
+            if (humedad > c.humedad.max) {
+                const fogOpacity = Math.min(0.95, 0.35 + ((humedad - c.humedad.max) / 25) * 0.6);
+                fogLayer.setAttribute('opacity', fogOpacity.toFixed(2));
+            } else {
+                fogLayer.setAttribute('opacity', '0');
+            }
+
+            fungusSpots.setAttribute('opacity', (humedad > c.humedad.max && temp > c.temp.max - 2) ? '0.92' : '0');
+
+            // 4. Reacción de la Planta (crecimiento por semana + estrés inmediato)
+            const plantAnchor = document.getElementById('gh-plant-anchor');
+            const plantBody = document.getElementById('gh-plant-body');
+            const foliageStd = document.getElementById('gh-foliage-standard');
+            const foliageLettuce = document.getElementById('gh-foliage-lettuce');
+            const stem = document.getElementById('gh-stem');
+            const roots = document.getElementById('gh-roots');
+
+            if (c.esLechuga) {
+                foliageStd.setAttribute('opacity', '0');
+                stem.setAttribute('opacity', '0');
+                foliageLettuce.setAttribute('opacity', '1');
+            } else {
+                foliageStd.setAttribute('opacity', '1');
+                stem.setAttribute('opacity', '1');
+                foliageLettuce.setAttribute('opacity', '0');
+            }
+
+            // Escala progresiva según semana (1 a 4)
+            const baseScaleByWeek = { 1: 0.68, 2: 0.84, 3: 1.0, 4: 1.15 };
+            let scale = baseScaleByWeek[appState.semana] || 0.68;
+            let tilt = 0;
+
+            plantAnchor.classList.remove('anim-shiver');
+
+            if (diag.codigo === 'ahogamiento' || diag.codigo === 'sequia') {
+                tilt = 24;
+                scale *= 0.92;
+            } else if (diag.codigo === 'calor') {
+                tilt = 16;
+                scale *= 0.92;
+            } else if (diag.codigo === 'helada') {
+                tilt = 5;
+                scale *= 0.86;
+                plantAnchor.classList.add('anim-shiver');
+            } else if (diag.nivel === 'precaucion') {
+                tilt = 7;
+            }
+
+            plantBody.setAttribute('transform', `scale(${scale.toFixed(2)}) rotate(${tilt})`);
+
+            // Coloración fisiológica de hojas y raíces
+            let leafColor = '#22c55e';
+            let stemColor = '#16a34a';
+            let rootColor = '#fde68a';
+
+            if (diag.codigo === 'ahogamiento') {
+                leafColor = '#eab308'; // Clorosis amarillenta
+                stemColor = '#a16207';
+                rootColor = '#1c1917'; // Raíces oscurecidas por asfixia
+            } else if (diag.codigo === 'sequia') {
+                leafColor = '#d97706'; // Hojas secas
+                stemColor = '#b45309';
+            } else if (diag.codigo === 'calor') {
+                leafColor = '#ea580c'; // Quemadura térmica
+                stemColor = '#c2410c';
+            } else if (diag.codigo === 'helada') {
+                leafColor = '#06b6d4'; // Tono azul gélido
+                stemColor = '#0891b2';
+            }
+
+            foliageStd.setAttribute('fill', leafColor);
+            stem.setAttribute('fill', stemColor);
+            roots.setAttribute('stroke', rootColor);
+
+            // Frutos aéreos o tubérculos según cultivo y semana
+            const fruitsGroup = document.getElementById('gh-fruits');
+            const potatoesGroup = document.getElementById('gh-potatoes');
+
+            if (c.tieneFrutoAereo && appState.semana >= 3) {
+                fruitsGroup.setAttribute('opacity', '1');
+                document.querySelectorAll('#gh-fruits circle').forEach(circle => {
+                    circle.setAttribute('fill', c.colorFruto);
+                });
+            } else {
+                fruitsGroup.setAttribute('opacity', '0');
+            }
+
+            if (c.esTuberculo) {
+                potatoesGroup.setAttribute('opacity', appState.semana >= 2 ? '1' : '0.45');
+                const pColor = diag.codigo === 'ahogamiento' ? '#1c1917' : '#d97706';
+                document.querySelectorAll('#gh-potatoes ellipse').forEach(el => {
+                    el.setAttribute('fill', pColor);
+                });
+            } else {
+                potatoesGroup.setAttribute('opacity', '0');
+            }
+        }
+
+        // =====================================================================
+        // AVANCE SEMANAL Y CICLO DE COSECHA
+        // =====================================================================
+        function avanzarSemana() {
+            const c = CULTIVOS_DB[appState.cultivo];
+            const diag = diagnosticarMicroclima(c, appState.riego, appState.temp, appState.humedad);
+
+            if (diag.nivel === 'optimo') {
+                if (appState.semana < 4) {
+                    appState.semana += 1;
+                    playFeedbackSound('success');
+                    mostrarReporteModal(
+                        '🌱',
+                        'Crecimiento Óptimo',
+                        `Avanzaste a la Semana ${appState.semana} de 4`,
+                        `Las condiciones ideales permitieron que tu cultivo de ${c.nombre.toLowerCase()} avanzara a la etapa ${appState.semana} con máxima vitalidad.`
+                    );
+                } else {
+                    // Cosecha completada en Semana 4
+                    appState.cosechas += 1;
+                    appState.semana = 1;
+                    playFeedbackSound('success');
+                    mostrarReporteModal(
+                        '🏆',
+                        '¡Cosecha Exitosa Completada!',
+                        `Ciclo Finalizado • Total Cosechas: ${appState.cosechas}`,
+                        `¡Excelente gestión agronómica, ${appState.usuario}! Recolectaste una cosecha sana de ${c.nombre.toLowerCase()} y se ha iniciado un nuevo ciclo en tu parcela.`
+                    );
+                }
+            } else if (diag.nivel === 'precaucion') {
+                if (appState.semana < 4) {
+                    appState.semana += 1;
+                    mostrarReporteModal(
+                        '⚡',
+                        'Avance con Estrés Moderado',
+                        `Semana ${appState.semana} de 4`,
+                        `El cultivo sobrevivió la semana, pero el desequilibrio ambiental redujo su vigor. Calibra los controles al rango óptimo para asegurar una buena cosecha.`
+                    );
+                } else {
+                    appState.cosechas += 1;
+                    appState.semana = 1;
+                    mostrarReporteModal(
+                        '🌾',
+                        'Cosecha Recolectada con Rendimiento Medio',
+                        `Ciclo Finalizado • Total Cosechas: ${appState.cosechas}`,
+                        `Lograste completar el ciclo de ${c.nombre.toLowerCase()}, aunque con menor rendimiento por el estrés acumulado. Se inició un nuevo ciclo.`
+                    );
+                }
+            } else {
+                // Peligro Crítico: Daña o pierde el cultivo
+                playFeedbackSound('danger');
+                if (appState.semana > 1) {
+                    appState.semana -= 1;
+                    mostrarReporteModal(
+                        '⚠️',
+                        'Daño Grave en el Cultivo',
+                        `Retroceso a Semana ${appState.semana} de 4`,
+                        `Mantener el cultivo bajo alerta crítica (${diag.titulo.replace(/[⚠️🏜️🔥❄️]/g, '').trim()}) provocó pérdida de biomasa. Corrige las variables de inmediato.`
+                    );
+                } else {
+                    mostrarReporteModal(
+                        '🥀',
+                        'Pérdida de Plántula',
+                        'Reinicio en Semana 1 de 4',
+                        `Las condiciones críticas destruyeron la plántula inicial de ${c.nombre.toLowerCase()}. Usa "Calibrar Óptimos" para estabilizar el invernadero.`
+                    );
+                }
+            }
+
+            actualizarTodo(false);
+            guardarPerfilLocal();
+        }
+
+        function mostrarReporteModal(icono, tag, titulo, texto) {
+            document.getElementById('modal-badge-icon').textContent = icono;
+            document.getElementById('modal-tag').textContent = tag;
+            document.getElementById('modal-heading').textContent = titulo;
+            document.getElementById('modal-text').textContent = texto;
+
+            const modal = document.getElementById('report-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function cerrarModal() {
+            const modal = document.getElementById('report-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Inicialización al cargar la página
+        window.onload = function () {
+            seleccionarCultivo('tomate', true);
+        };
+    </script>
+</body>
+</html>
